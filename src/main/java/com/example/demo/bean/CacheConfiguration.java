@@ -47,6 +47,20 @@ public class CacheConfiguration {
 	 *
 	 * allEntries：CacheEvict参数，true表示清除value中的全部缓存，默认为false
 	 * 
-	 * 
+	 *
+	 *
+	 * 具体缓存的配置此处不再介绍，重点对于key的配置进行说明：
+	 *		1、基本形式
+	 *			@Cacheable(value="cacheName", key"#id")
+	 *			public ResultDTO method(int id);
+	 *		2. 组合形式
+	 *			@Cacheable(value="cacheName", key"T(String).valueOf(#name).concat('-').concat(#password))
+	 *			public ResultDTO method(int name, String password);
+	 *		3、对象形式
+	 *			@Cacheable(value="cacheName", key"#user.id)
+	 *			public ResultDTO method(User user);
+	 *		4、自定义Key生成器
+	 *			@Cacheable(value="gomeo2oCache", keyGenerator = "keyGenerator")
+	 *			public ResultDTO method(User user);
 	 */
 }
