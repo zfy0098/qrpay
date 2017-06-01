@@ -13,6 +13,7 @@ import com.example.demo.util.LoadPro;
 import com.example.demo.util.LoggerTool;
 import com.example.demo.util.UtilsConstant;
 import net.sf.json.JSONObject;
+import org.apache.log4j.Logger;
 
 /**
  *   查询App版本号;
@@ -22,8 +23,7 @@ import net.sf.json.JSONObject;
 public class AppVersionService {
 
 	LoggerTool logger = new LoggerTool(this.getClass());
-	
-	@SuppressWarnings("unchecked")
+
 	public void appVersionInfo(RequestData reqData , ResponseData repData){
 	
 		/** 平台版本 **/
@@ -41,7 +41,7 @@ public class AppVersionService {
 		Object obj = ehcache.get(Constant.cacheName,  deviceType + "appversion");
 		if(obj==null){
 			map = AppVersionDB.getAppVersionInfo(new Object[]{deviceType});
-			ehcache.put(Constant.cacheName, "appversion", map);
+			ehcache.put(Constant.cacheName,  deviceType +  "appversion", map);
 		}else{
 			map = (Map<String,Object>) obj;
 		}

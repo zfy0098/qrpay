@@ -1,9 +1,11 @@
 package com.example.demo.util;
-import java.net.URL;   
+import java.net.URL;
 
+import com.example.demo.constant.Constant;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
+import org.springframework.cache.annotation.CacheEvict;
 
 
 /**
@@ -67,7 +69,8 @@ public class EhcacheUtil {
     public int cachesize(String cacheName){
     	return manager.getCache(cacheName).getSize();
     }
-    
+
+    @CacheEvict(value = Constant.cacheName, allEntries = true)
     public void clear(String cacheName){
     	Cache cache = manager.getCache(cacheName);
     	cache.removeAll();

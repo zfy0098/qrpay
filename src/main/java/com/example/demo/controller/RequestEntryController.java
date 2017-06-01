@@ -122,21 +122,15 @@ public class RequestEntryController {
 
                 EhcacheUtil ehcache = EhcacheUtil.getInstance();
 
-                Object obj = ehcache.get(Constant.cacheName, loginID + "UserInfo" );
-                if(obj == null){
-                    log.info("查询数据库");
-                    loginuser = LoginUserDB.loginuser(loginID);
-                    if(loginuser == null){
-                        log.info("未查到用户 " + loginID +"信息");
-                        respData.setRespCode(RespCode.userDoesNotExist[0]);
-                        respData.setRespDesc(RespCode.userDoesNotExist[1]);
-                        return  paraFilterReturn(respData);
-                    }
-                    ehcache.put(Constant.cacheName, loginID + "UserInfo" , loginuser);
-                }else{
-                    log.info("查询缓存");
-                    loginuser = (TabLoginuser) obj;
+                log.info("查询数据库");
+                loginuser = LoginUserDB.loginuser(loginID);
+                if(loginuser == null){
+                    log.info("未查到用户 " + loginID +"信息");
+                    respData.setRespCode(RespCode.userDoesNotExist[0]);
+                    respData.setRespDesc(RespCode.userDoesNotExist[1]);
+                    return  paraFilterReturn(respData);
                 }
+
 
                 if(!Txndir.equals("A006")&&!"A005".equals(Txndir)){
                     if(!requestData.getTerminalInfo().equals(loginuser.getLoginPSN())){
