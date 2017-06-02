@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.constant.Constant;
 import com.example.demo.constant.RespCode;
 import com.example.demo.db.LoginUserDB;
 import com.example.demo.mode.RequestData;
@@ -34,7 +33,7 @@ public class RequestEntryController {
 
     Logger log  =  Logger.getLogger(this.getClass());
 
-    @RequestMapping(value = "", method = {RequestMethod.GET , RequestMethod.POST})
+    @RequestMapping(value = "", method = {RequestMethod.POST})
     public Object requestentry(HttpServletRequest request , HttpServletResponse response){
 
         log.info("终端用户发起请求");
