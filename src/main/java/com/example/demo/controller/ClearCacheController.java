@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.constant.Constant;
+import com.example.demo.util.EhcacheUtil;
 import com.example.demo.util.LoggerTool;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +17,9 @@ public class ClearCacheController{
 	@RequestMapping("")
 	@CacheEvict(value = Constant.cacheName, allEntries = true)
 	public Object ClearCache(){
-//		logger.info("清除缓存中所有内容");
-//		EhcacheUtil ehcache = EhcacheUtil.getInstance();
-//		ehcache.clear(Constant.cacheName);
+		logger.info("清除缓存中所有内容");
+		EhcacheUtil ehcache = EhcacheUtil.getInstance();
+		ehcache.clear(Constant.cacheName);
 		return "SUCCESS";
 	}
 }

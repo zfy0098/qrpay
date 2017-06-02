@@ -1,11 +1,11 @@
 package com.example.demo.db;
 
 
-import java.util.List;
-import java.util.Map;
-
 import com.example.demo.mode.PayOrder;
 import com.example.demo.util.UtilsConstant;
+
+import java.util.List;
+import java.util.Map;
 
 public class TradeDB extends DBBase{
 
@@ -17,7 +17,11 @@ public class TradeDB extends DBBase{
 	 */
 	public static Map<String,Object> getUserConfig(Object[] obj){
 		String sql = "select * from tab_user_config where UserID=? and PayChannel=?";
-		return  jdbcTemplate.queryForMap(sql, obj);
+		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql,obj);
+		if(list == null || list.size() == 0){
+			return null;
+		}
+		return list.get(0);
 	}
 	
 	
@@ -85,7 +89,6 @@ public class TradeDB extends DBBase{
 		String sql = "insert into tab_pay_merchant (MerchantID,MerchantName,SignKey,DESKey,QueryKey,UserID,PayType) values "
 				+ "(?,?,?,?,?,?,?)";
 		return jdbcTemplate.batchUpdate(sql,list);
-//		return executeBatchSql(sql, list);
 	}
 	
 	
@@ -233,6 +236,10 @@ public class TradeDB extends DBBase{
 	 */
 	public static Map<String,Object> getBankInfo(String userID){
 		String sql = "select * from tab_pay_userbankcard where UserID=?";
-		return jdbcTemplate.queryForMap(sql, new Object[]{userID});
+		List<Map<String,Object>> list =  jdbcTemplate.queryForList(sql, new Object[]{userID});
+		if(list == null || list.size() == 0){
+			return null;
+		}
+		return list.get(0);
 	}
 }

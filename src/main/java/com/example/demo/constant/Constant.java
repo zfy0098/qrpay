@@ -115,31 +115,18 @@ public class Constant {
 	
 	/***************************  新平台   参数 ***************************************/
 	
-	/** 爱码付秘钥 **/
-	public static final String REPORT_CHANNELNO = "8934238750";
-	
-	public static final String REPORT_CHANNELNAME = "爱码付加强版";
-	
-	public static final String REPORT_DES3_KEY = "212876ea28cc11e7b8590894";
-	
-	public static final String REPORT_SIGN_KEY = "212876ea28cc11e7b8590894ef29bfa8";
-	
-	public static final String REPORT_QUERY_KEY = "212876ea28cc11e7b8590894ef29bfa8";
-	
-	
 	/** 融汇金服本部秘钥 **/
-//	public static final String REPORT_CHANNELNO = "8934738753";
-//	
-//	public static final String REPORT_CHANNELNAME = "融汇金服本部";
-//	
-//	public static final String REPORT_DES3_KEY = "pDOm9MY2z5M0fgWUSpMk6E3H";
-//	
-//	public static final String REPORT_SIGN_KEY = "ScUdy75fa4pUt52PD2LYV3X3zIxPM1ak";
-//	
-//	public static final String REPORT_QUERY_KEY = "ScUdy75fa4pUt52PD2LYV3X3zIxPM1ak";
+	public static final String REPORT_CHANNELNO = "8934738753";
+
+	public static final String REPORT_CHANNELNAME = "融汇金服本部";
+
+	public static final String REPORT_DES3_KEY = "pDOm9MY2z5M0fgWUSpMk6E3H";
+
+	public static final String REPORT_SIGN_KEY = "ScUdy75fa4pUt52PD2LYV3X3zIxPM1ak";
+
+	public static final String REPORT_QUERY_KEY = "ScUdy75fa4pUt52PD2LYV3X3zIxPM1ak";
 	
-	
-	
+
 	public static final String REPORT_URL = "http://portal.ronghuijinfubj.com/middlepayportal/merchant/in";
 
 	
