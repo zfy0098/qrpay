@@ -1,8 +1,5 @@
 package com.example.demo.service;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.example.demo.constant.Constant;
 import com.example.demo.constant.RespCode;
 import com.example.demo.constant.StringEncoding;
@@ -12,8 +9,10 @@ import com.example.demo.mode.RequestData;
 import com.example.demo.mode.ResponseData;
 import com.example.demo.mode.TabLoginuser;
 import com.example.demo.util.*;
-
 import net.sf.json.JSONObject;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TradeService {
 
@@ -30,23 +29,23 @@ public class TradeService {
 		EhcacheUtil ehcache = EhcacheUtil.getInstance();
 		
 		/** 查询用户交易配置信息  **/
-		Map<String,Object> map = null;
-		Object obj = ehcache.get(Constant.cacheName, loginUser.getID() + payChannel + "userConfig");
-		if(obj == null){
-			log.info("缓存读取用户支付配置信息失败，从数据中读取， 用户：" + loginUser.getID() + " , 支付类型:" + payChannel);
-			map = TradeDB.getUserConfig(new Object[]{ loginUser.getID() , payChannel});
-			if(map==null||map.isEmpty()){
-				log.info("用户：" + loginUser.getID() + "支付类型：" + payChannel + "系统为查到该类型配置信息" );
-				repData.setRespCode(RespCode.TradeTypeConfigError[0]);
-				repData.setRespDesc(RespCode.TradeTypeConfigError[1]); 
-				return ;
-			}
-			ehcache.put(Constant.cacheName, loginUser.getID() + payChannel + "userConfig" , map);
-		}else{
-			log.info("用户：" + loginUser.getID() + " , 支付类型:" + payChannel + "缓存读取信息成功 继续操作");
-			map = (Map<String,Object>) obj;
-			obj = null;
-		}
+		Map<String,Object> map =  TradeDB.getUserConfig( loginUser.getID() , payChannel);
+//		Object obj = ehcache.get(Constant.cacheName, loginUser.getID() + payChannel + "userConfig");
+//		if(obj == null){
+//			log.info("缓存读取用户支付配置信息失败，从数据中读取， 用户：" + loginUser.getID() + " , 支付类型:" + payChannel);
+//			map = TradeDB.getUserConfig( loginUser.getID() , payChannel);
+//			if(map==null||map.isEmpty()){
+//				log.info("用户：" + loginUser.getID() + "支付类型：" + payChannel + "系统为查到该类型配置信息" );
+//				repData.setRespCode(RespCode.TradeTypeConfigError[0]);
+//				repData.setRespDesc(RespCode.TradeTypeConfigError[1]);
+//				return ;
+//			}
+//			ehcache.put(Constant.cacheName, loginUser.getID() + payChannel + "userConfig" , map);
+//		}else{
+//			log.info("用户：" + loginUser.getID() + " , 支付类型:" + payChannel + "缓存读取信息成功 继续操作");
+//			map = (Map<String,Object>) obj;
+//			obj = null;
+//		}
 		
 		
 		/**  获取交易商户  **/
@@ -59,17 +58,9 @@ public class TradeService {
 		}
 		
 		//  查询交易配置信息
-		Map<String,Object> tradeConfig = null;
-		obj = ehcache.get(Constant.cacheName, "tradeConfig");
-		if(obj == null){
-			log.info("缓存中获取交易配置信息失败,从数据库中查询");
-			tradeConfig = TradeDB.getTradeConfig(); 
-		}else{
-			log.info("缓存查询交易配置信息");
-			tradeConfig = (Map<String,Object>) obj;
-		}
-		
-		
+		Map<String,Object> tradeConfig = TradeDB.getTradeConfig();
+
+
 		String encrypt = Constant.T1;
 		
 		String nowtime = DateUtil.getNowTime(DateUtil.HHmm);

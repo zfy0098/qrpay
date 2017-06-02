@@ -1,12 +1,17 @@
 package com.example.demo.db;
 
 
+import com.example.demo.constant.Constant;
 import com.example.demo.mode.PayOrder;
 import com.example.demo.util.UtilsConstant;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.Map;
 
+
+@CacheConfig(cacheNames = Constant.cacheName)
 public class TradeDB extends DBBase{
 
 	
@@ -15,9 +20,10 @@ public class TradeDB extends DBBase{
 	 * @param obj
 	 * @return
 	 */
-	public static Map<String,Object> getUserConfig(Object[] obj){
+	@Cacheable(key = "T(String).valueOf(#userid).concat(#paychannel).concat('userConfig')")
+	public static Map<String,Object> getUserConfig(String userid,String paychannel){
 		String sql = "select * from tab_user_config where UserID=? and PayChannel=?";
-		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql,obj);
+		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql,userid,paychannel);
 		if(list == null || list.size() == 0){
 			return null;
 		}
@@ -97,6 +103,7 @@ public class TradeDB extends DBBase{
 	 * @param
 	 * @return
 	 */
+	@Cacheable(key = "tradeConfig")
 	public static Map<String,Object> getTradeConfig(){
 		String sql = "select T0StartHour , T0StartMinute , T0EndHour , T0EndMinute , T0AttachFee , T0MinAmount , KuaiT0Time from tab_appconfig";
 		return jdbcTemplate.queryForMap(sql);
