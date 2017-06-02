@@ -29,7 +29,7 @@ public class TradeService {
 		EhcacheUtil ehcache = EhcacheUtil.getInstance();
 		
 		/** 查询用户交易配置信息  **/
-		Map<String,Object> map =  TradeDB.getUserConfig( loginUser.getID() , payChannel);
+		Map<String,Object> map =  TradeDB.getUserConfig(new Object[]{loginUser.getID() , payChannel});
 //		Object obj = ehcache.get(Constant.cacheName, loginUser.getID() + payChannel + "userConfig");
 //		if(obj == null){
 //			log.info("缓存读取用户支付配置信息失败，从数据中读取， 用户：" + loginUser.getID() + " , 支付类型:" + payChannel);

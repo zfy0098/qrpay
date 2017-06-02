@@ -17,13 +17,11 @@ public class TradeDB extends DBBase{
 	
 	/**
 	 *     查看用户配置信息
-	 * @param obj
-	 * @return
 	 */
-	@Cacheable(key = "T(String).valueOf(#userid).concat(#paychannel).concat('userConfig')")
-	public static Map<String,Object> getUserConfig(String userid,String paychannel){
+	@Cacheable(key = "T(String).valueOf(#obj[0]).concat(#obj[1]).concat('userConfig')")
+	public static Map<String,Object> getUserConfig(Object[] obj){
 		String sql = "select * from tab_user_config where UserID=? and PayChannel=?";
-		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql,userid,paychannel);
+		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql,obj);
 		if(list == null || list.size() == 0){
 			return null;
 		}

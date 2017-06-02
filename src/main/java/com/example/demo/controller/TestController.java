@@ -32,7 +32,7 @@ public class TestController {
 
     @RequestMapping("/merchant/{id}")
     public Object merchantlist(@PathVariable String id){
-        return testService.merchantlist(id);
+        return testService.merchantlist(new Object[]{id});
     }
 
 

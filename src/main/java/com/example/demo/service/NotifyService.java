@@ -1,11 +1,5 @@
 package com.example.demo.service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.example.demo.constant.Constant;
 import com.example.demo.db.AgentDB;
 import com.example.demo.db.TradeDB;
@@ -17,6 +11,12 @@ import com.example.demo.util.LoggerTool;
 import com.example.demo.util.PushUtils;
 import com.example.demo.util.UtilsConstant;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -253,8 +253,8 @@ public class NotifyService {
 	/**
 	 *   计算固定码手续费
 	 * @param order
-	 * @param loginUser
-	 * @param map
+	 * @param user
+	 * @param qrcode
 	 * @return
 	 */
 	public Fee YMFcalProfit(PayOrder order , TabLoginuser user , Map<String,Object> qrcode){
