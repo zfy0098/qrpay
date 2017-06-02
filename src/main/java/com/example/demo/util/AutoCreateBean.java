@@ -269,16 +269,4 @@ public class AutoCreateBean {
 		return null;
 	}
 
-	public static void main(String[] args) throws Exception {
-		AutoCreateBean auto = new AutoCreateBean();
-//		List<String> list = auto.TBlist();
-		
-		List<String> list = new ArrayList<String>();
-		
-		list.add("tab_ymf_qrcode");
-		
-		String content = auto.GenEntity(list);
-		String packageName = "com/rhjf/appserver/model";
-		auto.markerBean(auto.initcap(tablename), content, packageName);
-	}
 }

@@ -13,13 +13,6 @@ public class PushUtils {
 	
 	public static void IOSPush(String content,String tonken){
 		log.info(XingeApp.pushTokenIos(Constant.XingeApp_IOS_ACCESS_ID, Constant.XingApp_IOS_ACCESS_KEY, content, tonken,  XingeApp.IOSENV_PROD).toString());
-	
-		
-//		XingeApp xinge = new XingeApp(Constant.XingeApp_IOS_ACCESS_ID, Constant.XingApp_IOS_ACCESS_KEY);
-//		MessageIOS remoteMessageIOS = new MessageIOS();
-//		remoteMessageIOS.setType(MessageIOS.TYPE_REMOTE_NOTIFICATION);
-//		remoteMessageIOS.setRaw(content);
-//		System.out.println(xinge.pushSingleDevice(tonken, remoteMessageIOS , XingeApp.IOSENV_PROD));
 	}
 	
 	public static void AndroidPush(String title, String content , String token){
