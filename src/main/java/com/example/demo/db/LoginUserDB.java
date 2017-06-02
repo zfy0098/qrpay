@@ -1,14 +1,12 @@
 package com.example.demo.db;
 
-import java.util.List;
-import java.util.Map;
-
 import com.example.demo.mode.TabLoginuser;
-
 import com.example.demo.util.UtilsConstant;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.springframework.cache.annotation.Cacheable;
+
+import java.util.List;
+import java.util.Map;
 
 public class LoginUserDB extends DBBase{
 	
@@ -58,7 +56,6 @@ public class LoginUserDB extends DBBase{
 	 * @param userID
 	 * @return
 	 */
-	@Cacheable(key = "#userID"  + "UserInfo")
 	public static TabLoginuser loginuser(String userID){
 		String sql = "select * from tab_loginuser where LoginID=?";
 		Map<String,Object> map = jdbcTemplate.queryForMap(sql, new Object[]{userID});
@@ -226,7 +223,7 @@ public class LoginUserDB extends DBBase{
 		String sql="SELECT LoginID,ifnull(Name , '') as Name ,MerchantLeve,RegisterTime,BankInfoStatus,PhotoStatus,ThreeLevel,TwoLevel,OneLevel "
 				+ " from tab_loginuser where (ThreeLevel =? or TwoLevel=? or OneLevel=?)";
 
-		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql, new Object[]{userID,userID,userID});
+		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql, userID,userID,userID);
 		JSONArray jsonArray=new JSONArray();
 		
 		for (Map<String,Object> map : list) {
