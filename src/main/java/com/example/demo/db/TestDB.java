@@ -21,7 +21,7 @@ public class TestDB  extends  DBBase{
             e.printStackTrace();
         }
         String sql = "select * from tab_loginuser where id=?";
-        return jdbc.queryForList(sql, new Object[]{loginid});
+        return jdbc.queryForList(sql, loginid);
     }
 
     public List<Map<String,Object>> merchantlist(String id){
@@ -32,6 +32,6 @@ public class TestDB  extends  DBBase{
             e.printStackTrace();
         }
         String sql = "select * from tab_pay_merchant where userid=?";
-        return jdbc.queryForList(sql, new Object[]{id});
+        return jdbc.queryForList(sql, id);
     }
 }
